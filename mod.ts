@@ -15,6 +15,7 @@ interface Options {
   when?: Date;
 }
 
+/** This function returns a boolean if a certain day. */
 export function isit(
   something: Thing,
   options: Options,
