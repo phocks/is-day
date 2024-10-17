@@ -30,11 +30,12 @@ export function isit(
     Saturday = 6,
   }
 
-  const offsetHours = options.offsetHours || 0;
+  const offsetHours = options.offsetHours;
   const when = options.when || new Date();
-
-  const offsetMinutes = offsetHours * MINUTES_IN_HOUR;
   const localOffset = when.getTimezoneOffset();
+  const offsetMinutes = offsetHours !== undefined
+    ? offsetHours * MINUTES_IN_HOUR
+    : -localOffset;
   const offsetTime = new Date(
     when.getTime() +
       (offsetMinutes + localOffset) * MILLISECONDS_IN_MINUTE,
