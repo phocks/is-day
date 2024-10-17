@@ -18,7 +18,7 @@ interface Options {
 /** This function returns a boolean if a certain day. */
 export function isit(
   something: Thing,
-  options: Options,
+  options: Options = {},
 ): boolean {
   enum Days {
     Sunday = 0,
