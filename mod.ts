@@ -11,13 +11,13 @@ type Thing =
   | "Sunday";
 
 interface Options {
-  offsetHours: number;
-  when: Date;
+  offsetHours?: number;
+  when?: Date;
 }
 
 export function isit(
   something: Thing,
-  options: Options = { offsetHours: 10, when: new Date() },
+  options: Options,
 ): boolean {
   enum Days {
     Sunday = 0,
@@ -29,10 +29,13 @@ export function isit(
     Saturday = 6,
   }
 
-  const offsetMinutes = options.offsetHours * MINUTES_IN_HOUR;
-  const localOffset = options.when.getTimezoneOffset();
+  const offsetHours = options.offsetHours || 0;
+  const when = options.when || new Date();
+
+  const offsetMinutes = offsetHours * MINUTES_IN_HOUR;
+  const localOffset = when.getTimezoneOffset();
   const offsetTime = new Date(
-    options.when.getTime() +
+    when.getTime() +
       (offsetMinutes + localOffset) * MILLISECONDS_IN_MINUTE,
   );
 
